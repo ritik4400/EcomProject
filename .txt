@@ -1,0 +1,43 @@
+{
+    "message": "Login successful",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJpdGlrQGdtYWlsLmNvbSIsImlhdCI6MTcyMTU1OTY2Nn0.VVCVbUnftclzXeHVUEOpHGZhT6mzW5sCMQI1mrY9nDc"
+}
+{
+    "name": "Smartphone",
+    "description": "A high-end smartphone",
+    "price": 699.99,
+    "categoryId": "your-category-id-here",
+    "stock": 50,
+    "image": "smartphone.jpg"
+}
+{
+    "email": "john.doe@example.com",
+    "password": "password123"
+}
+//add to card
+{
+    "userId": "669b5eb84e7343c1c8eb5652",
+    "productId": "669cb40a7dce5cefa6499531",
+    "quantity": 2
+}
+{
+    "name": "Smartphone",
+    "description": "A high-end smartphone"
+}
+//order
+{
+    "userId": "your-user-id"
+}
+{
+    "username": "Omkar",
+    "email": "omkar@gmail.com",
+    "password": "1234567",
+    "isAdmin":true
+}
+"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJpdGlrdHJpdmVkaUBnbWFpbC5jb20iLCJpYXQiOjE3MjIzMzc2MDZ9.tsv8xEjQXD-4wWUswBbjbgNQKMgGNBG_vBwZimrBvI0"
+
+.trim(): Removes leading and trailing whitespace from strings.
+.min(length): Sets a minimum length requirement for strings.
+.precision(digits): Enforces a specific number of decimal places for numbers.
+.integer(): Ensures the number is an integer (whole number).
+.allow(""): Allows an empty string for optional fields.
