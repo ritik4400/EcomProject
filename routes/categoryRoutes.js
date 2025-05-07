@@ -13,7 +13,7 @@ router.get('/',(req,res)=>{
 router.get('/list',async(req,res)=>{
     try{
         const category = await Category.find({});
-        res.send(200).json(category);
+        res.status(200).json(category);
     }catch (error) {
         console.error('API Error:', error.message); // Log the error message
         res.status(500).json({ message: error.message });
@@ -29,10 +29,10 @@ router.post('/create',async(req,res)=>{
         const {name,description}= req.body;
         const category = await Category.create({
             name,description});
-        res.send(200).json(category);
+        res.status(200).json({category:category});
     }catch (error) {
         console.error('API Error:', error.message); // Log the error message
-        res.send(500).json({ message: error.message });
+        res.status(500).json({ message: error.message });
     }
 })
 
