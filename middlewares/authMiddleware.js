@@ -1,16 +1,17 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
-const JWT_SECRET="email";
+const JWT_SECRET='your-secret-key';
 // Middleware to check if the user is authenticated
 const authMiddleware =(req,res,next)=>{
-    const token = req.cookies.token ; //|| req.headers.authorisation?.split('')[1]
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
     if(!token){
         return res.status(401).json({messege:'Unauthorized'});
     }
     try{
-        const decoded = jwt.verify(token,JWT_SECRET);
-        req.User=decoded;
+        const decoded = jwt.verify(token,JWT_SECRET,);
+        req.user=decoded;
         next();
     }catch(error) {
         console.error('Authentication Error:', error.message);

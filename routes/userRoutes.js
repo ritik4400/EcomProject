@@ -13,6 +13,10 @@ const {
   updateUserSchema,
 } = require("../validator/userValidator");
 
+route.get('/protected',authMiddleware ,(req,res)=>{
+  res.json({message:"Welcome",user:req.user})
+})
+
 route.post("/login", async (req, res) => {
   try {
     const { error } = loginSchema.validate(req.body);
@@ -31,9 +35,9 @@ route.post("/login", async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
     // Generate JWT token
-    const token = jwt.sign({ email }, "email");
-    // Send token in a cookie
-    res.cookie("token", token);
+    const token = jwt.sign({ id: user.id, email: user.email }, 'your-secret-key' , {
+      expiresIn: '1h'
+    });
     res.status(200).json({ message: "Login successful", token });
   } catch (error) {
     console.error("API Error:", error.message);
@@ -110,5 +114,7 @@ route.put("/update/:id", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
+
 
 module.exports = route;
