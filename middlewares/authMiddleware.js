@@ -18,22 +18,14 @@ const authMiddleware =(req,res,next)=>{
         res.status(401).json({ message: 'Invalid token' });
     }
 };
-//admin middleware
-const adminMiddleware = async(req,res,next)=>{
-    try{
-        const user = await User.findOne({email:req.user.email});
-
-        if(user && user.isAdmin){
-            next();
+//rbac middleware
+function authorizeRoles(...allowedRoles){
+    return (req,res,next) =>{
+        if(!req.user || !allowedRoles.includes(req.user.role)){
+            return res.status(403).json({ message: 'Access denied: insufficient permissions' });
         }
-        else{
-            //403-cannot allow access to requested resource
-            res.status(403).json({messege:'Forbidden:admin only'})
-        }
-    }catch (error) {
-        console.error('Authorization Error:', error.message);
-        res.status(500).json({ message: 'Server error' });
-    }
+        next();
+    };
 }
 
 module.exports= {authMiddleware,adminMiddleware};

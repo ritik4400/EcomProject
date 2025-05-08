@@ -35,7 +35,7 @@ route.post("/login", async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
     // Generate JWT token
-    const token = jwt.sign({ id: user.id, email: user.email }, 'your-secret-key' , {
+    const token = jwt.sign({ id: user.id, email: user.email , role: user.role }, 'your-secret-key' , {
       expiresIn: '1h'
     });
     res.status(200).json({ message: "Login successful", token });
@@ -77,7 +77,7 @@ route.post("/register", async (req, res) => {
   }
 });
 //get all
-route.get("/request",authMiddleware, async (req, res) => {
+route.get("/request", async (req, res) => {
   try {
     const user = await User.find({});
     res.status(201).json(user);
