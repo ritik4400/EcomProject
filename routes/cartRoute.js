@@ -13,7 +13,7 @@ router.post("/add", async (req, res) => {
 
     const { error } = cartSchema.validate(req.body);
     if (error) {
-      return res.status(400).json({ messege: error.details[0].messege });
+      return res.status(400).json({ message: error.details[0].message });
     }
 
     const { userId, productId, quantity } = req.body;
