@@ -68,7 +68,9 @@ router.post("/add", async (req, res) => {
 router.get("/:userId", async (req, res) => {
   try {
     const { userId } = req.params;
-    const cart = await Cart.findOne({ user: userId }).populate("items.product");
+    
+    
+    const cart = await Cart.findOne({ userId: userId }).populate("items.productId");
     if (!cart) {
       return res.status(404).json({ message: "Cart not found" });
     }
