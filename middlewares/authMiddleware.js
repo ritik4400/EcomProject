@@ -1,16 +1,21 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
-const JWT_SECRET='your-secret-key';
+const JWT_SECRET= "your-secret-key"; 
 // Middleware to check if the user is authenticated
 const authMiddleware =(req,res,next)=>{
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
+    
+    // const JWT_SECRET= "your-secret-key";
+
     if(!token){
         return res.status(401).json({messege:'Unauthorized'});
     }
     try{
-        const decoded = jwt.verify(token,JWT_SECRET,);
+        const decoded = jwt.verify(token,process.env.JWT_SECRET);
+        console.log(decoded);
+        
         req.user=decoded;
         next();
     }catch(error) {
@@ -28,4 +33,4 @@ function authorizeRoles(...allowedRoles){
     };
 }
 
-module.exports= {authMiddleware,adminMiddleware};
+module.exports= {authMiddleware,authorizeRoles};
