@@ -1,7 +1,8 @@
 const express = require('express');
-const dotenv = require('dotenv');
+// const dotenv = require('dotenv');
 const mongoose= require('mongoose');
 const cookieParser = require('cookie-parser');
+const connectDB = require('./src/config/db')
 
 const userRoutes = require('./src/routes/userRoutes');
 const productRoutes = require('./src/routes/productRoutes');
@@ -12,7 +13,7 @@ const orderRoutes = require('./src/routes/orderRoutes');
 const path = require('path');
 const app = express();
 
-dotenv.config();
+// dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
@@ -30,10 +31,11 @@ app.use('/api/category', categoryRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/orders', orderRoutes);
 
-mongoose.connect('mongodb://localhost:27017/local')
-.then(() => console.log('MongoDB connected'))
-.catch(err => console.error('MongoDB connection error:', err));
+// mongoose.connect(config.MONGO_URI)
+// .then(() => console.log('MongoDB connected'))
+// .catch(err => console.error('MongoDB connection error:', err));
 
+connectDB();
 const port = process.env.port || 8080;
 app.listen(port,()=>{
     console.log(`server is running on ${port}`);
