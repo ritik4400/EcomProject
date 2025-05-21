@@ -11,6 +11,7 @@ const cartRoutes = require('./src/routes/cartRoute');
 const orderRoutes = require('./src/routes/orderRoutes');
 
 const path = require('path');
+const { log } = require('console');
 const app = express();
 
 // dotenv.config();
@@ -20,6 +21,7 @@ app.use(cookieParser());
 
 app.get('/Health',(req,res)=>{
     res.send("Working");
+    
 })
 
 app.set('view engine', 'ejs');
@@ -39,4 +41,5 @@ connectDB();
 const port = process.env.port || 8080;
 app.listen(port,()=>{
     console.log(`server is running on ${port}`);
+    console.log("http://localhost:8080/Health");
 })
