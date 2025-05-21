@@ -3,11 +3,11 @@ const dotenv = require('dotenv');
 const mongoose= require('mongoose');
 const cookieParser = require('cookie-parser');
 
-const userRoutes = require('./routes/userRoutes');
-const productRoutes = require('./routes/productRoutes');
-const categoryRoutes = require('./routes/categoryRoutes');
-const cartRoutes = require('./routes/cartRoute');
-const orderRoutes = require('./routes/orderRoutes');
+const userRoutes = require('./src/routes/userRoutes');
+const productRoutes = require('./src/routes/productRoutes');
+const categoryRoutes = require('./src/routes/categoryRoutes');
+const cartRoutes = require('./src/routes/cartRoute');
+const orderRoutes = require('./src/routes/orderRoutes');
 
 const path = require('path');
 const app = express();
