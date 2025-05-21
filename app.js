@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose= require('mongoose');
 const cookieParser = require('cookie-parser');
 const connectDB = require('./src/config/db')
+require('dotenv').config();
 
 const userRoutes = require('./src/routes/userRoutes');
 const productRoutes = require('./src/routes/productRoutes');
