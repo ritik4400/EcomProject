@@ -1,8 +1,8 @@
 const Cart = require("../models/cart");
 const Product = require("../models/product");
 const User = require("../models/user");
-const ObjectId = mongoose.Types.ObjectId;
-// const { ObjectId } = require('mongoose').Types;
+// const ObjectId = mongoose.Types.ObjectId;
+const { ObjectId } = require('mongoose').Types;
 
 const addToCartService = async (userId, productId, quantity) => {
   if (!ObjectId.isValid(userId) || !ObjectId.isValid(productId)) {
