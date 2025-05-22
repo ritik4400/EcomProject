@@ -1,17 +1,9 @@
-const mongoose = require("mongoose");
 const express = require("express");
 const route = express.Router();
-const path = require("path");
-const User = require("../models/user");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-
 const {
   authMiddleware,
   authorizeRoles,
 } = require("../middlewares/authMiddleware");
-const Joi = require("joi");
-const { updateUserSchema } = require("../validator/userValidator");
 
 route.get("/protected", authMiddleware, (req, res) => {
   res.json({ message: "Welcome", user: req.user });
@@ -26,9 +18,13 @@ route.get("/", (req, res) => {
   res.render("index");
 });
 
-const { fetchAllUser ,fetchUser , updateUser } = require("../controller.js/user.controller");
+const {
+  fetchAllUser,
+  fetchUser,
+  updateUser,
+} = require("../controller.js/user.controller");
 //get all
-// route.get("/request", fetchAllUser);
+route.get("/request", fetchAllUser);
 
 //GET SPECIFIC ID
 route.get("/request/:id", fetchUser);
