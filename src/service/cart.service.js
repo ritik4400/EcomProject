@@ -3,20 +3,21 @@ const Product = require("../models/product");
 const User = require("../models/user");
 // const ObjectId = mongoose.Types.ObjectId;
 const { ObjectId } = require('mongoose').Types;
+const AppError = require("../utils/appError");
 
 const addToCartService = async (userId, productId, quantity) => {
   if (!ObjectId.isValid(userId) || !ObjectId.isValid(productId)) {
-    throw new Error("Invalid ObjectId format");
+    throw new AppError("Invalid ObjectId format");
   }
 
   const user = await User.findById(userId);
   if (!user) {
-    throw new Error("User not found");
+    throw new AppError("User not found", 404);
   }
 
   const product = await Product.findById(productId);
   if (!product) {
-    throw new Error("Product not found");
+    throw new AppError("Product not found",404);
   }
 
   let cart = await Cart.findOne({ user: userId });

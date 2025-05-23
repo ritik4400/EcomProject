@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose= require('mongoose');
 const cookieParser = require('cookie-parser');
 const connectDB = require('./src/config/db')
+const errorHandler = require('./src/middlewares/errorHandler')
 require('dotenv').config();
 
 const userRoutes = require('./src/routes/userRoutes');
@@ -38,6 +39,7 @@ app.use('/api/orders', orderRoutes);
 // .then(() => console.log('MongoDB connected'))
 // .catch(err => console.error('MongoDB connection error:', err));
 
+app.use(errorHandler)
 connectDB();
 const port = process.env.port || 8080;
 app.listen(port,()=>{
