@@ -29,7 +29,9 @@ const registerUser = async (req, res) => {
     res
       .status(201)
       .json({ message: "User registered successfully", user: result });
+    logger.info(`User registration successful for email: ${email}`);
   } catch (error) {
+    //  logger.error(`Error in registerUser controller for email ${req.body.email}: ${error.message}`)
     const status = error.statusCode || 500;
     res.status(status).json({
       success: false,

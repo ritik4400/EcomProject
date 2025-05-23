@@ -1,12 +1,13 @@
 const Order = require('../models/order');
 const Cart = require('../models/cart');
+const AppError = require("../utils/appError");
 
 const  addOrderService = async({ userId })=>{
     const cart = await Cart.findOne({ userId: userId }).populate('items.productId');
         console.log(cart);
         
         if (!cart) {
-            return res.status(404).json({ message: 'Cart not found' });
+            throw new AppError("Cart not found", 404);
         }
         const orderItems = cart.items.map(item => ({
             product: item.productId._id,

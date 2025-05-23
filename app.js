@@ -1,8 +1,9 @@
 const express = require('express');
-// const dotenv = require('dotenv');
-const mongoose= require('mongoose');
+const morgan = require('morgan');
+const logger = require('./src/config/logger');
 const cookieParser = require('cookie-parser');
 const connectDB = require('./src/config/db')
+const errorHandler = require('./src/middlewares/errorHandler')
 require('dotenv').config();
 
 const userRoutes = require('./src/routes/userRoutes');
@@ -20,6 +21,15 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
+// B. Morgan Logging Middleware
+const morganStream = {
+  write: (message) => {
+    // Morgan adds a newline character at the end, so trim it
+    logger.http(message.trim());
+  },
+};
+app.use(morgan('combined', { stream: morganStream }));
+
 app.get('/Health',(req,res)=>{
     res.send("Working");
     
@@ -34,10 +44,7 @@ app.use('/api/category', categoryRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/orders', orderRoutes);
 
-// mongoose.connect(config.MONGO_URI)
-// .then(() => console.log('MongoDB connected'))
-// .catch(err => console.error('MongoDB connection error:', err));
-
+app.use(errorHandler)
 connectDB();
 const port = process.env.port || 8080;
 app.listen(port,()=>{
