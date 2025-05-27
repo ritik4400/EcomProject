@@ -1,11 +1,14 @@
 const express = require('express');
 const router = express.Router();
-
+const {
+  authMiddleware,
+  authorizeRoles,
+} = require("../middlewares/authMiddleware");
 const {addOrder , fetchOrder}= require('../controller.js/order.controller');
 
 // Create order
-router.post('/create',addOrder );
+router.post('/create',authMiddleware , authorizeRoles('admin','seller' , 'user')  ,addOrder );
 // Get user orders
-router.get('/:userId', fetchOrder);
+router.get('/:userId',authMiddleware ,authorizeRoles('admin','seller')  ,  fetchOrder);
 
 module.exports=router;

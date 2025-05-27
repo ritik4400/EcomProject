@@ -1,5 +1,5 @@
 const { updateUserSchema } = require("../validator/userValidator");
-// const User = require("../models/user");
+const User = require("../models/user");
 const {getUserByIdService  , updateUserService} = require("../service/user.service");
 
 const fetchAllUser = async (req, res) => {

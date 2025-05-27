@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
-// B. Morgan Logging Middleware
+//  Morgan Logging Middleware
 const morganStream = {
   write: (message) => {
     // Morgan adds a newline character at the end, so trim it

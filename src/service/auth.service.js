@@ -3,6 +3,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const AppError = require("../utils/appError");
 const logger = require("../config/logger"); // Import your logger
+
+
 const registerUserService = async ({ username, email, password, role }) => {
   logger.debug(`Attempting to register user with email: ${email}`);
   const existingUser = await User.findOne({ email });

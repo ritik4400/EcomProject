@@ -7,7 +7,7 @@ const errorHandler = (err,req,res,next) =>{
      err.status = err.status || 'error';
 
      // Log the full error in development
-  console.error('ERROR 💥:', err);
+  console.error('ERROR :', err);
 
    // Send formatted error response
    res.status(err.statusCode).json({

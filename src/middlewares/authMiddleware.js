@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
-const JWT_SECRET= "your-secret-key"; 
+
+const JWT_SECRET= process.env.JWT_SECRET || "your_secret_key"; 
 // Middleware to check if the user is authenticated
 const authMiddleware =(req,res,next)=>{
     const authHeader = req.headers['authorization'];

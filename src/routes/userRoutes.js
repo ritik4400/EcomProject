@@ -24,11 +24,11 @@ const {
   updateUser,
 } = require("../controller.js/user.controller");
 //get all
-route.get("/request", fetchAllUser);
+route.get("/request",authMiddleware ,authorizeRoles('admin' , 'seller'), fetchAllUser);
 
 //GET SPECIFIC ID
-route.get("/request/:id", fetchUser);
+route.get("/request/:id",authMiddleware,authorizeRoles('admin'), fetchUser);
 //update
-route.put("/update/:id", updateUser);
+route.put("/update/:id",authMiddleware, authorizeRoles('admin'), updateUser);
 
 module.exports = route;
